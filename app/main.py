@@ -1,8 +1,10 @@
 import utils
 import read_cvs
 import charts
+import pandas as pd
 
 def run():
+    '''
     data = read_cvs.read_csv('./data.csv')
     country = input('Type country => ')
 
@@ -11,7 +13,14 @@ def run():
     if len(result) > 0:
         country = result[0]
         labels, values = utils.get_population(country)
-        charts.generate_bar_chart(country['Country/Territory'], labels, values)
+    '''
+    df = pd.read_csv('./data.csv')
+    entrada = input("Escribe el nombre del continente: ")
+    df = df[df['Continent'] == entrada]
+    
+    countries = df['Country/Territory'].values
+    percentages = df['World Population Percentage'].values
+    charts.generate_pie_chart(countries, percentages)
 
 def run2():
     data = read_cvs.read_csv('./data.csv')
@@ -22,4 +31,4 @@ def run2():
 
 if __name__ == '__main__':
     run()
-    run2()
+    #run2()
